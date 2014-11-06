@@ -19,7 +19,6 @@ import com.thalmic.myo.Myo;
 import com.thalmic.myo.Pose;
 import com.thalmic.myo.scanner.ScanActivity;
 
-
 public class MainActivity extends Activity {
 
     private static final String TAG = "Error";
