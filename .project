@@ -3,6 +3,7 @@
 	<name>sportshack2014</name>
 	<comment></comment>
 	<projects>
+		<project>MyoSdk</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

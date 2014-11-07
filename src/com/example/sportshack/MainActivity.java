@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ibm.mobile.services.cloudcode.IBMCloudCode;
+import com.ibm.mobile.services.core.IBMBluemix;
+import com.ibm.mobile.services.data.IBMData;
+import com.ibm.mobile.services.push.IBMPush;
 import com.thalmic.myo.AbstractDeviceListener;
 import com.thalmic.myo.DeviceListener;
 import com.thalmic.myo.Hub;
@@ -21,7 +25,10 @@ import com.thalmic.myo.scanner.ScanActivity;
 
 
 public class MainActivity extends Activity {
-
+	public static final String APPLICATION_ID = "294e7073-3b20-4ce2-aff1-56eb59a624fc"
+			, APPLICATION_SECRET = "075afadf49b2dc31d448abdc6e0b54c59a7a6fdd"
+			, APPLICATION_ROUTE = "sportshack2014cloud.mybluemix.net";
+	
     private static final String TAG = "Error";
     public static TextView status;
 
@@ -34,7 +41,12 @@ public class MainActivity extends Activity {
         status = (TextView) findViewById(R.id.status);
         status.setBackgroundColor(Color.DKGRAY);
         
-        Hub hub = Hub.getInstance();
+        initHub();
+        initBluemix();
+        
+    }
+	private void initHub(){
+		Hub hub = Hub.getInstance();
         if (!hub.init(this)) {
             Log.e(TAG, "Could not initialize the Hub.");
             status.setText("Could not initialize the Hub.");
@@ -45,9 +57,15 @@ public class MainActivity extends Activity {
             status.setText("Hub Initialized");
         }
         Hub.getInstance().addListener(mListener);
-        
-    }
-	
+	}
+	private void initBluemix(){
+		IBMBluemix.initialize(this, APPLICATION_ID,
+			    APPLICATION_SECRET, APPLICATION_ROUTE);
+			IBMCloudCode.initializeService();
+			IBMData.initializeService();
+			
+			//IBMPush.initializeService();
+	}
 	 @Override
     protected void onResume() {
         super.onResume();
