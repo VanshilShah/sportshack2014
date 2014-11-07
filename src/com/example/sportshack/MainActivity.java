@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
             status.setText("Could not initialize the Hub.");
             finish();
             return;
-        }else{
+        } else {
         	status.setTextColor(Color.CYAN);
             status.setText("Hub Initialized");
         }
