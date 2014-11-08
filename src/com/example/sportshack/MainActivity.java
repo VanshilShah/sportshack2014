@@ -11,11 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import bolts.Continuation;
+import bolts.Task;
 
 import com.ibm.mobile.services.cloudcode.IBMCloudCode;
 import com.ibm.mobile.services.core.IBMBluemix;
+import com.ibm.mobile.services.core.http.IBMHttpResponse;
 import com.ibm.mobile.services.data.IBMData;
-import com.ibm.mobile.services.push.IBMPush;
 import com.thalmic.myo.AbstractDeviceListener;
 import com.thalmic.myo.DeviceListener;
 import com.thalmic.myo.Hub;
@@ -28,10 +30,9 @@ public class MainActivity extends Activity {
 	public static final String APPLICATION_ID = "294e7073-3b20-4ce2-aff1-56eb59a624fc"
 			, APPLICATION_SECRET = "075afadf49b2dc31d448abdc6e0b54c59a7a6fdd"
 			, APPLICATION_ROUTE = "sportshack2014cloud.mybluemix.net";
-	
-    private static final String TAG = "Error";
-    public static TextView status;
 
+    public static TextView status;
+    
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,7 @@ public class MainActivity extends Activity {
 	private void initHub(){
 		Hub hub = Hub.getInstance();
         if (!hub.init(this)) {
-            Log.e(TAG, "Could not initialize the Hub.");
+            Log.e("Error", "Could not initialize the Hub.");
             status.setText("Could not initialize the Hub.");
             finish();
             return;
@@ -61,9 +62,23 @@ public class MainActivity extends Activity {
 	private void initBluemix(){
 		IBMBluemix.initialize(this, APPLICATION_ID,
 			    APPLICATION_SECRET, APPLICATION_ROUTE);
-			IBMCloudCode.initializeService();
+			IBMCloudCode cloudCodeService = IBMCloudCode.initializeService();
 			IBMData.initializeService();
-			
+			cloudCodeService.get("/items").continueWith(new Continuation<IBMHttpResponse, Void>() {
+
+			    @Override
+			    public Void then(Task<IBMHttpResponse> task) throws Exception {
+			        if (task.isFaulted()) {
+			            // error handling code here
+			        } else {
+			            IBMHttpResponse response = task.getResult();
+			            if(response.getHttpResponseCode() == 200) {
+			                // take action on success
+			            }
+			        }
+			        return null;
+			    }
+			});
 			//IBMPush.initializeService();
 	}
 	 @Override
