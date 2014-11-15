@@ -1,10 +1,3 @@
-/**
-Handles all the physics, creates all the objects, updates ll states, main simulation base
-Physics World
-ICS-3UP
-@authors Viral Patel, Vanshil Shah, Adit Patel, Kunj Patel
-@version May 1, 2014
- */
 package com.example.sportshack;
 
 import android.content.Context;
@@ -20,59 +13,58 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Button;
 
-public class DrawingPanel extends SurfaceView implements SurfaceHolder.Callback  {
-	 PanelThread _thread;	  
-	 public Paint paint = new Paint();
-	
-	
-	 //Constructors
-	 public DrawingPanel(Context context) { 
-	        super(context); 
-	    	this.setBackgroundColor(Color.WHITE);
-	    }
-	 
-	 //Essentially the main method, runs multiple times and is where updating and drawing is done.
-	 	@Override 
-	 public void onDraw(Canvas canvas) {
-	        //do drawing stuff here.
-	 		update();
-	 		draw(canvas, paint);	 		
-	    }
-	
-	 	
-	 	@Override
-		public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-	    }
-	    @Override
-		public void surfaceCreated(SurfaceHolder holder) {
-
-
-	     setWillNotDraw(false); //Allows us to use invalidate() to call onDraw()
-
-
-	     _thread = new PanelThread(getHolder(), this); //Start the thread that
-	        _thread.setRunning(true);                     //will make calls to 
-	        _thread.start();                              //onDraw()
-	        init();
-	    }
-	    @Override
-		public void surfaceDestroyed(SurfaceHolder holder) {
-	     try {
-	            _thread.setRunning(false);                //Tells thread to stop
-	     _thread.join();                           //Removes thread from mem.
-	 } catch (InterruptedException e) {}
-	    }
-//-------------------------------INITIALIZATION------------------------------------------
-	    public void init(){
-	    	
-	    }
-//-------------------------------UPDATES-------------------------------------------------	    
-	    public void update(){
-	    	
-	    }
-//-------------------------------DRAWING-------------------------------------------------	    
-	    public void draw(Canvas canvas, Paint paint){
-	    	int x = 20, y = 25, boxWidth = 50, boxHeight = 75;
-	    	canvas.drawRect(new Rect(x, y, boxWidth, boxHeight), paint);
-	    }
+public class DrawingPanel extends SurfaceView implements SurfaceHolder.Callback {
+    
+    PanelThread thread;      
+    public Paint paint = new Paint();
+    
+    //Constructors
+    public DrawingPanel(Context context) { 
+        super(context); 
+        this.setBackgroundColor(Color.WHITE);
+    }
+     
+     //Essentially the main method, runs multiple times and is where updating and drawing is done.
+     @Override 
+     public void onDraw(Canvas canvas) {
+        //do drawing stuff here.
+         update();
+         draw(canvas, paint);             
+    }
+ 
+     @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+    }
+     
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        setWillNotDraw(false); //Allows us to use invalidate() to call onDraw()
+        thread = new PanelThread(getHolder(), this); //Start the thread that
+        thread.setRunning(true);                     //will make calls to onDraw()
+        thread.start();
+        init();
+    }
+    
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        try {
+            thread.setRunning(false); // Tells thread to stop
+            thread.join();            // Removes thread from mem
+         } catch (InterruptedException e) {
+             
+         }
+    }
+    
+    public void init() {
+        
+    }
+    
+    public void update() {
+        
+    }
+       
+    public void draw(Canvas canvas, Paint paint) {
+        int x = 20, y = 25, boxWidth = 50, boxHeight = 75;
+        canvas.drawRect(new Rect(x, y, boxWidth, boxHeight), paint);
+    }
 }
