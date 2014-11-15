@@ -3,16 +3,17 @@ package com.example.sportshack;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 
 class PanelThread extends Thread {
 	
     private SurfaceHolder _surfaceHolder;
-    private DrawingPanel _panel;
+    private SurfaceView _panel;
     private boolean _run = false;
     float x = 100, y = 100;
     MotionEvent e;
 
-    public PanelThread(SurfaceHolder surfaceHolder, DrawingPanel panel) {
+    public PanelThread(SurfaceHolder surfaceHolder, SurfaceView panel) {
         _surfaceHolder = surfaceHolder;
         _panel = panel;
     }

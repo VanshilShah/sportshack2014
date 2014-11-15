@@ -14,7 +14,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Button;
 
-public class DrawingPanel extends SurfaceView implements SurfaceHolder.Callback {
+public class MainPanel extends SurfaceView implements SurfaceHolder.Callback {
 	
 	MainActivity context;
 	Rect Myo = new Rect(0, 0, 300, 300);
@@ -22,7 +22,7 @@ public class DrawingPanel extends SurfaceView implements SurfaceHolder.Callback 
 	public Paint paint = new Paint();
 
 	//Constructors
-	public DrawingPanel(Context context) { 
+	public MainPanel(Context context) { 
 		super(context);
 		this.context = (MainActivity) context;	        
 		this.setBackgroundColor(Color.WHITE);

@@ -31,12 +31,12 @@ public final class R {
 		public static final int myosdk__scan_result_view = 0x7f090006;
 	}
 	public static final class layout {
-		public static final int myosdk__activity_scan = 0x7f030001;
-		public static final int myosdk__device_list_item = 0x7f030002;
-		public static final int myosdk__fragment_scan = 0x7f030003;
+		public static final int myosdk__activity_scan = 0x7f030006;
+		public static final int myosdk__device_list_item = 0x7f030007;
+		public static final int myosdk__fragment_scan = 0x7f030008;
 	}
 	public static final class menu {
-		public static final int myosdk__fragment_scan = 0x7f080001;
+		public static final int myosdk__fragment_scan = 0x7f080005;
 	}
 	public static final class string {
 		public static final int myosdk__action_scan = 0x7f060001;

@@ -33,16 +33,13 @@ public class MainActivity extends Activity {
             , APPLICATION_SECRET = "075afadf49b2dc31d448abdc6e0b54c59a7a6fdd"
             , APPLICATION_ROUTE = "sportshack2014cloud.mybluemix.net";
     
-    DrawingPanel dp;
     LinearLayout ll;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //opens drawingPanel, where simulation runs
         ll = new LinearLayout(this);
-        dp = new DrawingPanel(this);
-        ll.addView(dp);
+        ll.addView(new MainPanel(this));
         setContentView(ll);
         //setContentView(R.layout.activity_main);
 
