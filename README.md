@@ -1,4 +1,4 @@
-sportshack2014
+MYOwnTrainer
 ==============
 
-Wearable devices hackathon
+Personal fitness trainer for MYO armband, developed during SportsHack2014.
